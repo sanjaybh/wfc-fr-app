@@ -5,7 +5,8 @@ import { router } from 'expo-router'
 //Alternative to passing navigation as prop, useNavigation hook is provided by native module
 import { useNavigation } from '@react-navigation/native'
 
-const MealItem = ({ id, title, imageUrl, duration, complexity, affordability }) => {
+const MealItem = ({ id, title, imageUrl, duration, complexity, affordability, fromPage }) => {
+    //console.log("fromPage - " + fromPage)
 
     //Just in case we need to use the navigation without passing as prop
     const navigation = useNavigation();
@@ -14,6 +15,7 @@ const MealItem = ({ id, title, imageUrl, duration, complexity, affordability }) 
         navigation.navigate('MealsDetailScreen', { mealId: id, mealTitle: title })
     }
 
+    //console.log(id, title, imageUrl, duration, complexity, affordability)
     return (
         <View style={styles.mealItem}>
             <Pressable
