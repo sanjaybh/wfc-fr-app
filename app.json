@@ -1,17 +1,24 @@
 {
   "expo": {
-    "name": "wfc-fr-app",
+    "name": "WFC-Fundraiser(-v1.0.0)",
     "slug": "wfc-fr-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/wfc/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
+    "_backgroundColor":"#1e085e",
+    "_4backgroundColor":"#24180f",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/images/wfc/icon.png",
+      "resizeMode": "stretch",
+      //cover , contain , stretch , repeat , and center
       "backgroundColor": "#ffffff"
     },
+    // "androidStatusBar": {
+    //   "backgroundColor": "#C2185B",
+    //   "translucent": false
+    // },
     "ios": {
       "supportsTablet": true
     },
@@ -27,7 +34,20 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      [
+        "expo-router",
+        {
+          "origin": "https://myapp.com",
+          // "isAuthenticationEnabled": true
+        }
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "your_merchant_identifier",
+          "enableGooglePay": true
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

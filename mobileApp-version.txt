@@ -1,0 +1,43 @@
+react-18.2.0
+react-native - 0.74.2
+expo go - ~51.0.17 (SDK 2.31.2)
+Amplify
+
+awsAppSync
+lambda (for Payment API)
+hosting for services API integrations
+
+React native app
+ - svg support
+ - icons
+ - fonts
+ - nativewind (css framework)
+ - react-native-gifted-charts
+ - react-native-svg
+
+nativewind for expo - https://www.nativewind.dev/quick-starts/expo
+reactnative - https://reactnative.dev/docs/
+
+
+
+
+curl -X POST -H "Content-Type: application/json" "{'amount':17950}" http://localhost:4002/payments/create-payment-intent
+
+
+https://dashboard.stripe.com/test/payments
+======[Stripe]============
+Publishable Key
+--------------
+pk_test_51QAJaKGOl2xOUOBH05603MhKsbhGGwFhHsJRtPCrDgPFW7B1FJcjp0gBeZJkuSZEziGfwF3jIv0AamkH5RSQdq1P004NAH1rww
+
+Secret Key
+------------
+sk_test_51QAJaKGOl2xOUOBHOKGgtATBDxlrblsDE7YxIJOcwud6OJdYLPFCYzJ9LJp2Zw6bZ2RC8gjgjWJ7u8f3UPMZqtQf008n7ilLqK
+
+
+Install dependencies
+npm install @stripe/stripe-react-native
+
+https://www.npmjs.com/package/@stripe/stripe-react-native
+
+https://www.youtube.com/watch?v=FBXUPJ9_Xl0&t=185s

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Failed</title>
+    <style>
+        .failed-container {
+            text-align: center;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+        .failed-icon {
+            color: #f44336;
+            font-size: 48px;
+        }
+        .failed-message {
+            margin: 20px 0;
+            font-size: 24px;
+        }
+        .retry-button {
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="failed-container">
+        <div class="failed-icon">✕</div>
+        <h1 class="failed-message">Payment Failed</h1>
+        <p>Something went wrong with your payment. Please try again.</p>
+        <button class="retry-button" onclick="window.location.href='/'">
+            Try Again
+        </button>
+    </div>
+</body>
+</html>
