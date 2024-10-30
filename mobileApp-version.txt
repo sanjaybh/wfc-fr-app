@@ -18,11 +18,7 @@ React native app
 nativewind for expo - https://www.nativewind.dev/quick-starts/expo
 reactnative - https://reactnative.dev/docs/
 
-
-
-
 curl -X POST -H "Content-Type: application/json" "{'amount':17950}" http://localhost:4002/payments/create-payment-intent
-
 
 https://dashboard.stripe.com/test/payments
 ======[Stripe]============
@@ -33,7 +29,6 @@ pk_test_51Q******
 Secret Key
 ------------
 sk_test_51QA****
-
 
 Install dependencies
 npm install @stripe/stripe-react-native
