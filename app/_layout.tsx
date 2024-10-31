@@ -3,15 +3,19 @@ import { StatusBar } from 'expo-status-bar'
 import { Ionicons } from '@expo/vector-icons';
 
 //Context Provider
+//import FavoritesContextProvider from '../store/context/favorites-context'
 
-import FavoritesContextProvider from '../store/context/favorites-context'
+//Redux Provider
+import { Provider } from 'react-redux';
+import { store } from '../store/redux/store'
+
 
 // === [Navigation Container and Stack navigation] === \\
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
-
+// === [Pages and screens app is based on] === \\
 //import AddGoal from './AddGoal'
 //import PetShopHome from '@/components/PetShopHome'
 //import Baker from '@/components/Baker'
@@ -61,7 +65,8 @@ export default function RootLayout() {
   return (
     <>
       <StatusBar style='light' />
-      <FavoritesContextProvider>
+      <Provider store={store}>
+        {/* <FavoritesContextProvider> */}
         <NavigationContainer independent={true}>
           <Stack.Navigator
             initialRouteName='MealsCategories'
@@ -98,7 +103,8 @@ export default function RootLayout() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavoritesContextProvider>
+        {/* </FavoritesContextProvider> */}
+      </Provider>
     </>
   )
 }
