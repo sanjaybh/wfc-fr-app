@@ -1,14 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-import PaymentScreen from '../../components/PaymentScreen'
+//import PaymentScreen from '../../components/PaymentScreen'
+
+import PaymentPaypalScreen from '@/components/PaymentPaypalScreen'
 
 export default function Checkout() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Checkout</Text>
-      <PaymentScreen />
-    </View>
+    <>
+      <View style={styles.container}>
+        <Text style={styles.title}>Checkout</Text>
+        {/* <PaymentScreen />*/}
+        <PaymentPaypalScreen />
+      </View>
+    </>
   )
 }
 
