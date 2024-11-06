@@ -1,17 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-//import PaymentScreen from '../../components/PaymentScreen'
-
-import PaymentPaypalScreen from '@/components/PaymentPaypalScreen'
+import PaymentScreen from '../../components/PaymentScreen'
 
 export default function Checkout() {
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.title}>Checkout</Text>
-        {/* <PaymentScreen />*/}
-        <PaymentPaypalScreen />
+        <PaymentScreen />
       </View>
     </>
   )
@@ -23,7 +20,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 16,
     marginBottom: 20,
   },
 })

@@ -9,38 +9,41 @@ let secretKey =
 
 let amountDebited = 250.0;
 
-let orderDetail = {
-  intent: "CAPTURE",
-  purchase_units: [
-    {
-      items: [
-        {
-          name: "T-Shirt",
-          description: "Green XL2",
-          quantity: "1",
-          unit_amount: {
-            currency_code: "USD",
-            value: amountDebited,
+function createOrderDetails(amountDebited) {
+  let orderDetail = {
+    intent: "CAPTURE",
+    purchase_units: [
+      {
+        items: [
+          {
+            name: "T-Shirt",
+            description: "Green XL2",
+            quantity: "1",
+            unit_amount: {
+              currency_code: "USD",
+              value: amountDebited,
+            },
           },
-        },
-      ],
-      amount: {
-        currency_code: "USD",
-        value: amountDebited,
-        breakdown: {
-          item_total: {
-            currency_code: "USD",
-            value: amountDebited,
+        ],
+        amount: {
+          currency_code: "USD",
+          value: amountDebited,
+          breakdown: {
+            item_total: {
+              currency_code: "USD",
+              value: amountDebited,
+            },
           },
         },
       },
+    ],
+    application_context: {
+      return_url: "https://example.com/return",
+      cancel_url: "https://example.com/cancel",
     },
-  ],
-  application_context: {
-    return_url: "https://example.com/return",
-    cancel_url: "https://example.com/cancel",
-  },
-};
+  };
+  return orderDetail;
+}
 
 const generateToken = () => {
   var headers = new Headers();
@@ -60,18 +63,20 @@ const generateToken = () => {
     fetch(baseUrl + "/v1/oauth2/token", requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log("result print", result);
+        //console.log("result print", result);
         const { access_token } = JSON.parse(result);
         resolve(access_token);
       })
       .catch((error) => {
-        console.log("error raised", error);
+        //console.log("error raised", error);
         reject(error);
       });
   });
 };
 
-const createOrder = (token = "") => {
+const createOrder = (token = "", amount) => {
+  let orderDetail = createOrderDetails(amount);
+
   var requestOptions = {
     method: "POST",
     headers: {
@@ -85,12 +90,12 @@ const createOrder = (token = "") => {
     fetch(baseUrl + "/v2/checkout/orders", requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log("result print", result);
+        //console.log("result print", result);
         const res = JSON.parse(result);
         resolve(res);
       })
       .catch((error) => {
-        console.log("error raised", error);
+        //console.log("error raised", error);
         reject(error);
       });
   });
@@ -109,12 +114,12 @@ const capturePayment = (id, token = "") => {
     fetch(baseUrl + `/v2/checkout/orders/${id}/capture`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log("result print", result);
+        //console.log("result print", result);
         const res = JSON.parse(result);
         resolve(res);
       })
       .catch((error) => {
-        console.log("error raised", error);
+        //console.log("error raised", error);
         reject(error);
       });
   });

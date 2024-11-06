@@ -1,85 +1,27 @@
-import { initStripe, useStripe } from '@stripe/stripe-react-native'
 import React, { useEffect, useState } from 'react'
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native'
-
 import { useRouter } from 'expo-router'
 
-import { STRIPE_CONFIG } from '../config/Stripe'
-import { createPaymentIntent } from '../service/paymentService'
+import StripeBtn from './payments/Stripe/StripeBtn'
+import PaypalBtn from './payments/PayPal/PaypalBtn'
 
 const PaymentScreen = () => {
-  const { initPaymentSheet, presentPaymentSheet } = useStripe()
+  const [number, onChangeNumber] = useState('111.00')
   const [loading, setLoading] = useState(false)
-  const [number, onChangeNumber] = React.useState('')
-
   const router = useRouter()
-
-  useEffect(() => {
-    initializeStripe()
-  }, [])
-
-  const initializeStripe = async () => {
-    await initStripe({
-      publishableKey: STRIPE_CONFIG.publishableKey,
-      merchantIdentifier: STRIPE_CONFIG.merchantId,
-      urlScheme: STRIPE_CONFIG.urlScheme,
-    })
-  }
-  const handlePayment_old = async () => {}
-  const handlePayment = async () => {
-    if (number.trim() == '') {
-      Alert.alert('Alert', 'This field is required.')
-      return
-    }
-
-    const amount = number
-    try {
-      setLoading(true)
-      const { clientSecret, message, success } = await createPaymentIntent(
-        amount
-      )
-      // Initialize payment sheet
-      const { error: initError } = await initPaymentSheet({
-        paymentIntentClientSecret: clientSecret,
-        merchantDisplayName: 'WFC fundraiser, INC',
-        style: 'automatic',
-        googlePay: true,
-        applePay: true,
-      })
-      //console.log('Intent created successfully ', clientSecret)
-      if (initError) {
-        Alert.alert('Error', initError.message)
-        return
-      }
-
-      // Present payment sheet
-      const { error: paymentError } = await presentPaymentSheet()
-      if (paymentError) {
-        Alert.alert('Error', paymentError.message)
-      } else {
-        Alert.alert('Success', 'Payment completed successfully')
-        //window.location.href = '../assets/success.html'
-      }
-    } catch (error) {
-      Alert.alert('Error', error.message)
-    } finally {
-      setLoading(false)
-      router.push('/(tabs)/dashboard')
-    }
-  }
-
   return (
     <View style={styles.container}>
       <Text
         style={{
           color: 'blue',
           fontWeight: 'bold',
-          fontSize: 15,
+          fontSize: 12,
           marginBottom: 2,
         }}
       >
-        Enter Amount
+        Enter Amount ($)
       </Text>
+
       <TextInput
         style={styles.input}
         onChangeText={onChangeNumber}
@@ -89,13 +31,18 @@ const PaymentScreen = () => {
         mode="outlined"
         label="Amount"
       />
-      <View style={styles.button}>
-        <Button
-          title={loading ? 'Processing...' : 'Pay'}
-          onPress={() => handlePayment()}
-          disabled={loading}
-        />
-      </View>
+      <Text style={{
+        color: 'red',
+        fontWeight: 'bold',
+        fontSize: 9,
+        marginBottom: 2,
+      }}>Make sure your server is up ?</Text>
+
+      {/* Use Stripe payment button */}
+      <StripeBtn amount={number} router={router} />
+
+      {/* Use PayPal payment button */}
+      <PaypalBtn amount={number} router={router} />
     </View>
   )
 }
